@@ -2,10 +2,15 @@
 Import-Module PS-Menu
 
 function ccd(){
-	$list=@('..') + (dir -Directory)
-	cd (menu $list)
-
-	ccd(0)
+	$list=@('.') + @('..') + (dir -Directory)
+	cls
+	echo ((Get-Item .).FullName)
+	$s=(menu $list)
+	cd $s
+	if($s -ne '.')
+	{
+		ccd(0)
+	}
 }
 
 #oh-my-posh init pwsh --config 'C:\users\manoj\tiwahu.omp.json' | Invoke-Expression
